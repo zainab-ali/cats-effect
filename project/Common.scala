@@ -16,7 +16,7 @@
 
 import sbt._, Keys._
 
-import de.heikoseeberger.sbtheader.HeaderPlugin.autoImport._
+import sbtheader.HeaderPlugin.autoImport._
 import org.typelevel.sbt.TypelevelPlugin
 import org.typelevel.sbt.TypelevelKernelPlugin.autoImport._
 import org.typelevel.sbt.TypelevelMimaPlugin.autoImport._
