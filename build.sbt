@@ -1057,7 +1057,13 @@ lazy val ioAppTestsJVM =
     .settings(
       buildInfoKeys += "platform" -> "jvm",
       Test / fork := true,
-      Test / javaOptions += s"-Dcatseffect.examples.classpath=${(tests.jvm / Compile / fullClasspath).value.map(_.data.getAbsolutePath).mkString(File.pathSeparator)}"
+      Test / javaOptions += {
+        // See https://www.scala-sbt.org/2.x/docs/en/changes/migrating-from-sbt-1.x.html#migrating-classpath-type
+        val converter = fileConverter.value
+        val classpath = (tests.jvm / Compile / fullClasspath).value
+        val paths = classpath.map(entry => converter.toPath(entry.data).toAbsolutePath.toString)
+        s"-Dcatseffect.examples.classpath=${paths.mkString(File.pathSeparator)}"
+      }
     )
 
 lazy val ioAppTestsJS =
