@@ -511,9 +511,9 @@ lazy val laws = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .settings(
     name := "cats-effect-laws",
     libraryDependencies ++= Seq(
-      "org.typelevel" %%% "cats-laws" % CatsVersion,
-      "org.typelevel" %%% "cats-mtl-laws" % CatsMtlVersion % Test,
-      "org.typelevel" %%% "discipline-munit" % DisciplineMUnitVersion % Test
+      "org.typelevel" %% "cats-laws" % CatsVersion,
+      "org.typelevel" %% "cats-mtl-laws" % CatsMtlVersion % Test,
+      "org.typelevel" %% "discipline-munit" % DisciplineMUnitVersion % Test
     )
   )
 
