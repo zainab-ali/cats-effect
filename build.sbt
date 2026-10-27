@@ -454,9 +454,9 @@ lazy val kernel = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .settings(
     name := "cats-effect-kernel",
     libraryDependencies ++= Seq(
-      "org.typelevel" %%% "cats-core" % CatsVersion,
-      "org.typelevel" %%% "cats-mtl" % CatsMtlVersion,
-      "org.scalameta" %%% "munit" % MUnitVersion % Test
+      "org.typelevel" %% "cats-core" % CatsVersion,
+      "org.typelevel" %% "cats-mtl" % CatsMtlVersion,
+      "org.scalameta" %% "munit" % MUnitVersion % Test
     ),
     mimaBinaryIssueFilters ++= Seq(
       ProblemFilters.exclude[MissingClassProblem]("cats.effect.kernel.Ref$SyncRef"),
@@ -464,10 +464,10 @@ lazy val kernel = crossProject(JSPlatform, JVMPlatform, NativePlatform)
     )
   )
   .jsSettings(
-    libraryDependencies += "org.scala-js" %%% "scala-js-macrotask-executor" % MacrotaskExecutorVersion % Test
+    libraryDependencies += "org.scala-js" %% "scala-js-macrotask-executor" % MacrotaskExecutorVersion % Test
   )
   .nativeSettings(
-    libraryDependencies += "io.github.cquiroz" %%% "scala-java-time" % "2.7.0"
+    libraryDependencies += "io.github.cquiroz" %% "scala-java-time" % "2.7.0"
   )
 
 /**
@@ -480,9 +480,9 @@ lazy val kernelTestkit = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .settings(
     name := "cats-effect-kernel-testkit",
     libraryDependencies ++= Seq(
-      "org.typelevel" %%% "cats-free" % CatsVersion,
-      "org.scalacheck" %%% "scalacheck" % ScalaCheckVersion,
-      "org.typelevel" %%% "coop" % CoopVersion),
+      "org.typelevel" %% "cats-free" % CatsVersion,
+      "org.scalacheck" %% "scalacheck" % ScalaCheckVersion,
+      "org.typelevel" %% "coop" % CoopVersion),
     scalacOptions -= "-Xsource:3", // bugged
     mimaBinaryIssueFilters ++= Seq(
       ProblemFilters.exclude[DirectMissingMethodProblem](
@@ -528,7 +528,7 @@ lazy val core = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .settings(
     name := "cats-effect",
     libraryDependencies ++= Seq(
-      "org.typelevel" %%% "cats-mtl" % CatsMtlVersion
+      "org.typelevel" %% "cats-mtl" % CatsMtlVersion
     ),
     scalacOptions ++= {
       if (scalaVersion.value.startsWith("2.13"))
@@ -860,7 +860,7 @@ lazy val core = crossProject(JSPlatform, JVMPlatform, NativePlatform)
     }
   )
   .jsSettings(
-    libraryDependencies += "org.scala-js" %%% "scala-js-macrotask-executor" % MacrotaskExecutorVersion,
+    libraryDependencies += "org.scala-js" %% "scala-js-macrotask-executor" % MacrotaskExecutorVersion,
     mimaBinaryIssueFilters ++= {
       Seq(
         // introduced by #2857, when we properly turned on MiMa for Scala.js
@@ -999,7 +999,7 @@ lazy val testkit = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .settings(
     name := "cats-effect-testkit",
     libraryDependencies ++= Seq(
-      "org.scalacheck" %%% "scalacheck" % ScalaCheckVersion
+      "org.scalacheck" %% "scalacheck" % ScalaCheckVersion
     )
   )
   .nativeSettings(nativeTestSettings)
@@ -1014,12 +1014,12 @@ lazy val tests: CrossProject = crossProject(JSPlatform, JVMPlatform, NativePlatf
   .settings(
     name := "cats-effect-tests",
     libraryDependencies ++= Seq(
-      "org.scalacheck" %%% "scalacheck" % ScalaCheckVersion,
-      "org.scalameta" %%% "munit" % MUnitVersion % Test,
-      "org.scalameta" %%% "munit-scalacheck" % MUnitScalaCheckVersion % Test,
-      "org.typelevel" %%% "discipline-munit" % DisciplineMUnitVersion % Test,
-      "org.typelevel" %%% "cats-kernel-laws" % CatsVersion % Test,
-      "org.typelevel" %%% "cats-mtl-laws" % CatsMtlVersion % Test
+      "org.scalacheck" %% "scalacheck" % ScalaCheckVersion,
+      "org.scalameta" %% "munit" % MUnitVersion % Test,
+      "org.scalameta" %% "munit-scalacheck" % MUnitScalaCheckVersion % Test,
+      "org.typelevel" %% "discipline-munit" % DisciplineMUnitVersion % Test,
+      "org.typelevel" %% "cats-kernel-laws" % CatsVersion % Test,
+      "org.typelevel" %% "cats-mtl-laws" % CatsMtlVersion % Test
     ),
     githubWorkflowArtifactUpload := false
   )
@@ -1042,7 +1042,7 @@ def configureIOAppTests(p: Project): Project =
   p.enablePlugins(NoPublishPlugin, BuildInfoPlugin)
     .settings(
       Test / unmanagedSourceDirectories += (LocalRootProject / baseDirectory).value / "ioapp-tests" / "src" / "test" / "scala",
-      libraryDependencies += "org.scalameta" %%% "munit" % MUnitVersion % Test,
+      libraryDependencies += "org.scalameta" %% "munit" % MUnitVersion % Test,
       buildInfoPackage := "cats.effect",
       buildInfoKeys ++= Seq(
         "jsRunner" -> (tests.js / Compile / fastOptJS / artifactPath).value,
@@ -1090,7 +1090,7 @@ lazy val std = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .settings(
     name := "cats-effect-std",
     libraryDependencies ++= Seq(
-      "org.scalameta" %%% "munit" % MUnitVersion % Test
+      "org.scalameta" %% "munit" % MUnitVersion % Test
     ),
     scalacOptions ++= {
       if (scalaVersion.value.startsWith("2.13"))
@@ -1212,7 +1212,7 @@ lazy val std = crossProject(JSPlatform, JVMPlatform, NativePlatform)
       )
   )
   .jsSettings(
-    libraryDependencies += "org.scala-js" %%% "scala-js-macrotask-executor" % MacrotaskExecutorVersion % Test,
+    libraryDependencies += "org.scala-js" %% "scala-js-macrotask-executor" % MacrotaskExecutorVersion % Test,
     mimaBinaryIssueFilters ++= Seq(
       // introduced by #2604, Fix Console on JS
       // changes to a static forwarder, which are meaningless on JS
