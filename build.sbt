@@ -441,9 +441,9 @@ lazy val rootJVM = project
     benchmarks)
   .enablePlugins(NoPublishPlugin)
 
-lazy val rootJS = project.aggregate(jsProjects: _*).enablePlugins(NoPublishPlugin)
+lazy val rootJS = project.aggregate(jsProjects*).enablePlugins(NoPublishPlugin)
 
-lazy val rootNative = project.aggregate(nativeProjects: _*).enablePlugins(NoPublishPlugin)
+lazy val rootNative = project.aggregate(nativeProjects*).enablePlugins(NoPublishPlugin)
 
 /**
  * The core abstractions and syntax. This is the most general definition of Cats Effect, without
