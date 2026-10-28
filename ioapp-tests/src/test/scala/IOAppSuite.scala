@@ -94,9 +94,7 @@ class IOAppSuite extends FunSuite {
     def builder(proto: String, args: List[String]) =
       Process(
         s"node",
-        "--enable-source-maps" :: BuildInfo
-          .jsRunner
-          .getAbsolutePath :: s"catseffect.examples.$proto" :: args)
+        "--enable-source-maps" :: BuildInfo.jsRunner :: s"catseffect.examples.$proto" :: args)
 
     def pid(proto: String): Option[Int] = {
       val stdoutBuffer = new StringBuffer()
@@ -108,7 +106,7 @@ class IOAppSuite extends FunSuite {
       Source
         .fromString(output)
         .getLines()
-        .find(l => l.contains(BuildInfo.jsRunner.getAbsolutePath) && l.contains(proto))
+        .find(l => l.contains(BuildInfo.jsRunner) && l.contains(proto))
         .map(_.split(" +")(1).toInt)
     }
   }
@@ -117,7 +115,7 @@ class IOAppSuite extends FunSuite {
     val dumpSignal = "USR1"
 
     def builder(proto: String, args: List[String]) =
-      Process(BuildInfo.nativeRunner.getAbsolutePath, s"catseffect.examples.$proto" :: args)
+      Process(BuildInfo.nativeRunner, s"catseffect.examples.$proto" :: args)
 
     def pid(proto: String): Option[Int] = {
       val stdoutBuffer = new StringBuffer()
@@ -129,7 +127,7 @@ class IOAppSuite extends FunSuite {
       Source
         .fromString(output)
         .getLines()
-        .find(l => l.contains(BuildInfo.nativeRunner.getAbsolutePath) && l.contains(proto))
+        .find(l => l.contains(BuildInfo.nativeRunner) && l.contains(proto))
         .map(_.split(" +")(1).toInt)
     }
   }
