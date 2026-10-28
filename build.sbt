@@ -303,7 +303,7 @@ lazy val useJSEnv =
   settingKey[JSEnv]("Use Node.js or a headless browser for running Scala.js tests")
 Global / useJSEnv := NodeJS
 
-ThisBuild / jsEnv := {
+ThisBuild / jsEnv := Def.uncached {
   useJSEnv.value match {
     case NodeJS => new NodeJSEnv(NodeJSEnv.Config().withSourceMap(true))
     case Firefox =>
