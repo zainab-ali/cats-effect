@@ -1071,7 +1071,9 @@ lazy val ioAppTestsJS =
     .in(file("ioapp-tests/.js"))
     .configure(configureIOAppTests)
     .settings(
-      (Test / test) := (Test / test).dependsOn(tests.js / Compile / fastOptJS).value,
+      // TODO: Zainab - This fails to compile as `test` is now an input task
+      // Should this hook into `testFull` or `executeTests` instead?
+      // (Test / test) := (Test / test).dependsOn(tests.js / Compile / fastOptJS).value,
       buildInfoKeys += "platform" -> "js"
     )
 
@@ -1080,7 +1082,9 @@ lazy val ioAppTestsNative =
     .in(file("ioapp-tests/.native"))
     .configure(configureIOAppTests)
     .settings(
-      (Test / test) := (Test / test).dependsOn(tests.native / Compile / nativeLink).value,
+      // TODO: Zainab - This fails to compile as `test` is now an input task
+      // Should this hook into `testFull` or `executeTests` instead?
+      // (Test / test) := (Test / test).dependsOn(tests.native / Compile / nativeLink).value,
       buildInfoKeys += "platform" -> "native"
     )
 
