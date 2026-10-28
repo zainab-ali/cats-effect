@@ -419,7 +419,8 @@ lazy val root = project
   .enablePlugins(NoPublishPlugin)
   .enablePlugins(ScalaUnidocPlugin)
   .settings(
-    name := "cats-effect",
+    // This was renamed to avoid conflicts with the core module. It should not affect any published artifacts.
+    name := "cats-effect-root",
     ScalaUnidoc / unidoc / unidocProjectFilter := {
       undocumentedRefs.foldLeft(inAnyProject)((acc, a) => acc -- inProjects(a))
     },
