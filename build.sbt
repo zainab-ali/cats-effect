@@ -1045,10 +1045,18 @@ def configureIOAppTests(p: Project): Project =
       Test / unmanagedSourceDirectories += (LocalRootProject / baseDirectory).value / "ioapp-tests" / "src" / "test" / "scala",
       libraryDependencies += "org.scalameta" %% "munit" % MUnitVersion % Test,
       buildInfoPackage := "cats.effect",
-      buildInfoKeys ++= Seq(
-        "jsRunner" -> (tests.js / Compile / fastOptJS / artifactPath).value,
-        "nativeRunner" -> (tests.native / Compile / crossTarget).value / (tests.native / Compile / moduleName).value
-      )
+      buildInfoKeys ++= {
+        // artifactPath is a relative path and prints as "${OUT}/sjs1/scala...". It must be converted to an absolute path using the file converter.
+        val converter = fileConverter.value
+        val jsRunner = (tests.js / Compile / fastOptJS / artifactPath).value
+        val nativeRunner =
+          (tests.native / Compile / crossTarget).value / (tests.native / Compile / moduleName).value
+        Seq(
+          "jsRunner" -> converter.toPath(jsRunner).toAbsolutePath.toString,
+          "nativeRunner" -> nativeRunner.getAbsolutePath
+        )
+      }
+
     )
 
 lazy val ioAppTestsJVM =
